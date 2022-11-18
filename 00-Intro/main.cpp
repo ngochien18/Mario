@@ -63,7 +63,6 @@ int BackBufferHeight = 0;
 #define BRICK_START_Y 200.0f
 
 #define BRICK_START_VX 0.2f
-#define BRICK_START_VY 0.1f
 
 #define BRICK_WIDTH 16.0f
 #define BRICK_HEIGHT 16.0f
@@ -77,7 +76,7 @@ D3DX10_SPRITE spriteBrick;
 float brick_x = BRICK_START_X;
 float brick_vx = BRICK_START_VX;
 float brick_y = BRICK_START_Y;
-float brick_vy = BRICK_START_VY;
+
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -312,11 +311,9 @@ void Update(DWORD dt)
 	//brick_x++;
 
 	brick_x += brick_vx*dt; 
-	brick_y += brick_vy * dt;
 
 	// NOTE: BackBufferWidth is indeed related to rendering!!
 	float right_edge = BackBufferWidth - BRICK_WIDTH;
-	float upper_edge = BackBufferHeight - BRICK_HEIGHT;
 
 	if (brick_x < 0 || brick_x > right_edge) {
 
@@ -331,11 +328,6 @@ void Update(DWORD dt)
 		////	{
 		////		brick_x = right_edge;
 		////	}
-	}
-
-	if (brick_y < 0 || brick_y > upper_edge) {
-
-		brick_vy = -brick_vy;
 	}
 }
 
@@ -377,9 +369,9 @@ void Render()
 	}
 }
 
-HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int ScreenHeight) 
+HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int ScreenHeight)
 {
-	WNDCLASSEX wc; //
+	WNDCLASSEX wc;
 	wc.cbSize = sizeof(WNDCLASSEX);
 
 	wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -436,7 +428,7 @@ int Run()
 
 	while (!done)
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) //peekmessage khong dung cho
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			if (msg.message == WM_QUIT) done = 1;
 
@@ -491,7 +483,7 @@ void Cleanup()
 }
 
 int WINAPI WinMain(
-	_In_ HINSTANCE hInstance, //handle hieu don gian la id dinh danh
+	_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPSTR lpCmdLine,
 	_In_ int nCmdShow
@@ -500,11 +492,11 @@ int WINAPI WinMain(
 	hWnd = CreateGameWindow(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (hWnd == 0) return 0;
 
-	InitDirectX(hWnd); //khoi_dong directx de ve
+	InitDirectX(hWnd);
 
-	LoadResources(); // load cac tai nguyen nhu hinh anh
-	Run(); //chay vong lap game
-	Cleanup(); // don dep tat
+	LoadResources();
+	Run();
+	Cleanup();
 
 	return 0;
 }
