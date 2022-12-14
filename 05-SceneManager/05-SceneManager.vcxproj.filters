@@ -40,6 +40,9 @@
     <Filter Include="Header Files\Object\Portal">
       <UniqueIdentifier>{beaa44ac-9552-4c7c-bb78-0e4c5b75e487}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{4beecf3d-2ed6-4b39-9c2c-e2c7b80cbbfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="BrickQuestion.cpp">
       <Filter>Header Files\Object\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Header Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="BrickQuestion.h">
       <Filter>Header Files\Object\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
