@@ -1,3 +1,4 @@
+/*
 #include "BrickQuestion.h"
 #include "Mario.h"
 #include "PlayScene.h"
@@ -91,3 +92,5 @@ void CBrickQuestion::SetState(int state)
 
 	}
 }
+
+*/

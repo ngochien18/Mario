@@ -1,3 +1,4 @@
+/*
 #include "Koopa.h"
 #include "Goomba.h"
 #include "Mario.h"
@@ -396,3 +397,4 @@ void CKoopa::SetState(int state) {
 	CGameObject::SetState(state);
 }
 
+*/
