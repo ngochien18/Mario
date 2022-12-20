@@ -936,4 +936,291 @@ int CMario::GetAniIdSmall()
 
 	return aniId;
 }
+int CMario::GetAniIdBig()
+{
+	int aniId = -1;
+	if (!isChanging) {
+		if (!isOnPlatform)
+		{
+			if (!isHolding) {
+				if (levelRun == LEVEL_RUN_MAX)
+				{
+					if (nx >= 0)
+						aniId = ID_ANI_MARIO_BIG_JUMP_RUN_RIGHT;
+					else
+						aniId = ID_ANI_MARIO_BIG_JUMP_RUN_LEFT;
+				}
+				else
+				{
+					if (nx >= 0)
+						aniId = ID_ANI_MARIO_BIG_JUMP_WALK_RIGHT;
+					else
+						aniId = ID_ANI_MARIO_BIG_JUMP_WALK_LEFT;
+				}
+			}
+			else {
+				if (nx >= 0) aniId = ID_ANI_MARIO_BIG_HOLD_JUMP_RIGHT;
+				else  aniId = ID_ANI_MARIO_BIG_HOLD_JUMP_LEFT;
+			}
+		}
+		else
+			if (!isHolding) {
+				if (!isKicking) {
+					if (isSitting)
+					{
+						if (nx > 0)
+							aniId = ID_ANI_MARIO_BIG_SIT_RIGHT;
+						else
+							aniId = ID_ANI_MARIO_BIG_SIT_LEFT;
+					}
+					else
+						if (vx == 0)
+						{
+							if (nx > 0) aniId = ID_ANI_MARIO_BIG_IDLE_RIGHT;
+							else aniId = ID_ANI_MARIO_BIG_IDLE_LEFT;
+						}
+						else if (vx > 0)
+						{
+							if (ax < 0)
+								aniId = ID_ANI_MARIO_BIG_BRACE_RIGHT;
+							else if (ax == MARIO_ACCEL_RUN_X) {
+								if (levelRun == LEVEL_RUN_MAX) aniId = ID_ANI_MARIO_BIG_RUNNING_RIGHT;
+								else aniId = ID_ANI_MARIO_BIG_RUNNING_PREPARE_RIGHT;
+							}
+							else if (ax == MARIO_ACCEL_WALK_X)
+								aniId = ID_ANI_MARIO_BIG_WALKING_RIGHT;
+						}
+						else // vx < 0
+						{
+							if (ax > 0)
+								aniId = ID_ANI_MARIO_BIG_BRACE_LEFT;
+							else if (ax == -MARIO_ACCEL_RUN_X) {
+								if (levelRun == LEVEL_RUN_MAX) aniId = ID_ANI_MARIO_BIG_RUNNING_LEFT;
+								else aniId = ID_ANI_MARIO_BIG_RUNNING_PREPARE_LEFT;
+							}
+							else if (ax == -MARIO_ACCEL_WALK_X)
+								aniId = ID_ANI_MARIO_BIG_WALKING_LEFT;
+						}
+				}
+				else {
+					if (nx > 0) aniId = ID_ANI_MARIO_BIG_KICK_RIGHT;
+					else aniId = ID_ANI_MARIO_BIG_KICK_LEFT;
+				}
+			}
+			else {
+				if (vx == 0) {
+					if (nx > 0) aniId = ID_ANI_MARIO_BIG_HOLD_IDLE_RIGHT;
+					else aniId = ID_ANI_MARIO_BIG_HOLD_IDLE_LEFT;
+				}
+				else {
+					if (nx > 0) aniId = ID_ANI_MARIO_BIG_HOLD_RUNNING_RIGHT;
+					else aniId = ID_ANI_MARIO_BIG_HOLD_RUNNING_LEFT;
+				}
+			}
+	}
+	else {
+		if (nx > 0) aniId = ID_ANI_MARIO_CHANGE_SMALL_TO_BIG_RIGHT;
+		else aniId = ID_ANI_MARIO_CHANGE_SMALL_TO_BIG_LEFT;
+	}
 
+	if (aniId == -1) aniId = ID_ANI_MARIO_BIG_IDLE_RIGHT;
+
+	return aniId;
+}
+
+void CMario::Render()
+{
+	CAnimations* animations = CAnimations::GetInstance();
+
+	int aniId = -1;
+	if (state == MARIO_STATE_DIE)
+		aniId = ID_ANI_MARIO_DIE;
+	else if (level == MARIO_LEVEL_BIG)
+		aniId = GetAniIdBig();
+	else if (level == MARIO_LEVEL_SMALL)
+		aniId = GetAniIdSmall();
+	else if (level == MARIO_LEVEL_FIRE)
+		aniId = GetAniIdFire();
+	else if (level == MARIO_LEVEL_TAIL)
+		aniId = GetAniIdTail();
+	if ((level > MARIO_LEVEL_BIG)) {
+		if (!isChanging) animations->Get(aniId)->Render(x, y);
+	}
+	else {
+		if ((level == MARIO_LEVEL_BIG) && (isLower)) {
+		}
+		else {
+			if (!untouchable)
+			{
+				animations->Get(aniId)->Render(x, y);
+			}
+			else {
+				int check = rand() % 2;
+				if (check == 0) {
+					animations->Get(aniId)->Render(x, y);
+				}
+			}
+		}
+	}
+	//DebugOutTitle(L"aniId %d", aniId);
+
+	//RenderBoundingBox();
+
+	//DebugOutTitle(L"Coins: %d", coin);
+}
+
+void CMario::SetState(int state)
+{
+	// DIE is the end state, cannot be changed! 
+	if (this->state == MARIO_STATE_DIE) return;
+
+	switch (state)
+	{
+	case MARIO_STATE_RUNNING_RIGHT:
+		if ((isUsePipe) || (isSitting))
+		{
+			vx = 0;
+			break;
+		}
+		SetMarioTailAttack();
+		maxVx = MARIO_RUNNING_SPEED + levelRun * SPEED_LEVEL_RUN;
+		ax = MARIO_ACCEL_RUN_X;
+		isRunning = true;
+		nx = 1;
+		break;
+
+	case MARIO_STATE_RUNNING_LEFT:
+		if ((isUsePipe) || (isSitting))
+		{
+			vx = 0;
+			break;
+		}
+		SetMarioTailAttack();
+		maxVx = -MARIO_RUNNING_SPEED - levelRun * SPEED_LEVEL_RUN;
+		ax = -MARIO_ACCEL_RUN_X;
+		isRunning = true;
+		nx = -1;
+		break;
+	case MARIO_STATE_WALKING_RIGHT:
+		if ((isUsePipe) || (isSitting))
+		{
+			vx = 0;
+			break;
+		}
+		isRunning = false;
+
+		maxVx = MARIO_WALKING_SPEED;
+		ax = MARIO_ACCEL_WALK_X;
+		nx = 1;
+		break;
+	case MARIO_STATE_WALKING_LEFT:
+		if ((isUsePipe) || (isSitting))
+		{
+			vx = 0;
+			break;
+		}
+		isRunning = false;
+
+		maxVx = -MARIO_WALKING_SPEED;
+		ax = -MARIO_ACCEL_WALK_X;
+		nx = -1;
+		break;
+	case MARIO_STATE_FALL:
+		if (vy < 0) vy += MARIO_JUMP_SPEED_Y / 5;
+		isRunning = false;
+
+		break;
+	case MARIO_STATE_JUMP:
+		if (isSitting) break;
+		if (isOnPlatform)
+		{
+			if (abs(this->vx) == MARIO_RUNNING_SPEED)
+				vy = -MARIO_JUMP_RUN_SPEED_Y;
+			else
+				vy = -MARIO_JUMP_SPEED_Y;
+		}
+		break;
+
+	case MARIO_STATE_RELEASE_JUMP:
+		if (isUsePipe) break;
+		if (vy < 0) vy += MARIO_JUMP_SPEED_Y / 2;
+		break;
+
+	case MARIO_STATE_SIT:
+		if (isOnPlatform && level != MARIO_LEVEL_SMALL)
+		{
+			isSitting = true;
+			isRunning = false;
+			vy = 0;
+			y += MARIO_SIT_HEIGHT_ADJUST - 4;
+		}
+		break;
+
+	case MARIO_STATE_SIT_RELEASE:
+
+		if (isSitting)
+		{
+			ay = MARIO_GRAVITY;
+			isSitting = false;
+			y -= MARIO_SIT_HEIGHT_ADJUST;
+		}
+		break;
+
+	case MARIO_STATE_IDLE:
+		ax = 0.0f;
+		vx = 0.0f;
+		if (isSitting) {
+			state = MARIO_STATE_SIT_RELEASE;
+		}
+		//vy = 0.0f;
+		break;
+	case MARIO_STATE_TAIL_ATTACK:
+		isTailAttack = true;
+		start_tail_attack = GetTickCount64();
+		break;
+	case MARIO_STATE_FLY:
+		isFlying = true;
+		isOnPlatform = false;
+		SetFly();
+		break;
+	case MARIO_STATE_SHOOT:
+		if (GetTickCount64() - start_limit_shoot > TIME_SHOOT_LIMIT) {
+			isShoot = true;
+			start_shoot = GetTickCount64();
+		}
+		break;
+	case MARIO_STATE_DOWNING_PIPE:
+		isUsePipe = true;
+		vx = 0;
+		ay = 0;
+		startUsePiPeY = y;
+		vy = MARIO_SPEED_USE_PIPE;
+		break;
+	case MARIO_STATE_UPPING_PIPE:
+		isUsePipe = true;
+		vx = 0;
+		ay = 0;
+		startUsePiPeY = y;
+		vy = -MARIO_SPEED_USE_PIPE;
+		break;
+	case MARIO_STATE_DIE:
+		vy = -MARIO_JUMP_DEFLECT_SPEED_DIE;
+		ay = MARIO_GRAVITY / 3;
+		untouchable = false;
+		start_change_scene_die = GetTickCount64();
+		vx = 0;
+		ax = 0;
+		break;
+	case MARIO_STATE_END_SCENE:
+		isPrepareEndScene = true;
+		maxVx = MARIO_WALKING_SPEED;
+		ax = MARIO_ACCEL_WALK_X;
+		isRunning = false;
+		nx = 1;
+		break;
+	case MARIO_STATE_CHANGE_WORLD_MAP:
+		start_change_scene_clock = GetTickCount64();
+		break;
+	}
+	CGameObject::SetState(state);
+}
