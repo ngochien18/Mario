@@ -395,36 +395,53 @@ public:
 	bool IsEndScene() { return isEndScene; }
 	bool IsNotMove() { return isNotMove; }
 
-public:
-	CMario(float x, float y) : CGameObject(x, y)
-	{
-		isSitting = false;
-		maxVx = 0.0f;
-		ax = 0.0f;
-		ay = MARIO_GRAVITY; 
-
-		level = MARIO_LEVEL_BIG;
-		untouchable = 0;
-		untouchable_start = -1;
-		isOnPlatform = false;
-		coin = 0;
-	}
-	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-	void Render();
+	bool GetIsPrepareUp() { return isPrepareUp; }
+	bool GetIsUsePipe() { return isUsePipe; }
+	bool GetIsTailAttack() { return isTailAttack; }
+	bool GetIsFlying() { return isFlying; }
+	bool GetIsHolding() { return isHolding; }
+	bool GetIsKicking() { return isKicking; }
+	bool GetIsOnPlatform() { return isOnPlatform; }
+	bool GetIsRunning() { return isRunning; }
+	bool GetIsShoot() { return isShoot; }
+	bool IsBrace() { return (ax * vx < 0); }
+	bool GetIsChanging() { return isChanging; }
+	//set
+	void SetScoreCollision(int l) { scoreUpCollision = l; }
 	void SetState(int state);
-
-	int IsCollidable()
-	{ 
-		return (state != MARIO_STATE_DIE); 
-	}
-
-	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable==0); }
-
-	void OnNoCollision(DWORD dt);
-	void OnCollisionWith(LPCOLLISIONEVENT e);
-
+	void SetIsHolding(bool b) { isHolding = b; }
+	void SetIsKicking(bool b) { isKicking = b; }
+	void SetIsRunning(bool b) { isRunning = b; }
+	void SetIsPrepareUp(bool b) { isPrepareUp = b; }
+	void SetCoin(int coin) { this->coin = coin; }
 	void SetLevel(int l);
+	void SetVy(float v) { vy = v; }
+	void SetScore(int l) { score = l; }
+	//void phat sinh
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
-
-	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void SetFly();
+	void SetMarioTailAttack();
+	void SetLevelLower();
+	void AddChangeAnimation();
+	void AddEffectAttack(float xTemp, float yTemp);
+	void AddScore(float xTemp, float yTemp, int scoreAdd);
+	void IncreaseScoreUpCollision(float xTemp, float yTemp);
+	void TeleportToHiddenMap() {
+		SetPosition(POSITION_X_HIDDEN_MAP, POSITION_Y_HIDDEN_MAP);
+	}
+	void ReturnWorldFromHiddenMap() {
+		SetPosition(POSITION_X_OUT_HIDDEN_MAP, POSITION_Y_OUT_HIDDEN_MAP);
+	}
+	void SaveDataGame();
+	bool MarioInDeadZone();
+	bool MarioInPositionEndScene() { return x > POSITION_MAX_END_SCENE; }
+	void AdjustLogicSitting();
+	void ChangeWorldMapWhenDie();
+	void ChangeWorldMapWhenNotDie();
+	void SettingMarioAutoMoveEndPlayScene();
+	void AddEffectEndWorldFont1();
+	void AddEffectEndWorldFont2();
+	void AdjustHoldingKoopa();
+	void DownTimeClock1Second();
+	void DownTimeClockAndAddScore();
 };

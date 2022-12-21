@@ -1224,3 +1224,342 @@ void CMario::SetState(int state)
 	}
 	CGameObject::SetState(state);
 }
+void CMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+{
+
+	if (level != MARIO_LEVEL_SMALL)
+	{
+
+		if (isSitting)
+		{
+			left = x - MARIO_BIG_SITTING_BBOX_WIDTH / 2;
+			top = y - MARIO_BIG_SITTING_BBOX_HEIGHT / 2;
+			right = left + MARIO_BIG_SITTING_BBOX_WIDTH;
+			bottom = top + MARIO_BIG_SITTING_BBOX_HEIGHT;
+		}
+		else {
+			left = x - MARIO_BIG_BBOX_WIDTH / 2;
+			top = y - MARIO_BIG_BBOX_HEIGHT / 2;
+			right = left + MARIO_BIG_BBOX_WIDTH;
+			bottom = top + MARIO_BIG_BBOX_HEIGHT;
+		}
+
+	}
+	else
+	{
+		left = x - MARIO_SMALL_BBOX_WIDTH / 2;
+		top = y - MARIO_SMALL_BBOX_HEIGHT / 2;
+		right = left + MARIO_SMALL_BBOX_WIDTH;
+		bottom = top + MARIO_SMALL_BBOX_HEIGHT;
+	}
+}
+
+void CMario::SetLevel(int l)
+{
+	// Adjust position to avoid falling off platform
+	if (this->level == MARIO_LEVEL_SMALL)
+	{
+		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT) / 2;
+	}
+
+	isChanging = true;
+	start_changing = GetTickCount64();
+
+	level = l;
+}
+
+void CMario::BlockIfNoBlock(LPGAMEOBJECT gameobject) {
+	if (level == MARIO_LEVEL_SMALL) {
+		//SetY(platform->GetY() - 15);
+		if (gameobject->GetY() - GetY() < (MARIO_SMALL_BBOX_HEIGHT + 4))
+		{
+			SetY(gameobject->GetY() - MARIO_SMALL_BBOX_HEIGHT - 2);
+			vy = 0;
+			isOnPlatform = true;
+		}
+	}
+	else {
+		if (!isSitting) {
+			if (gameobject->GetY() - GetY() < MARIO_BIG_BBOX_HEIGHT)
+			{
+				SetY(gameobject->GetY() - MARIO_BIG_BBOX_HEIGHT + 4);
+				vy = 0;
+				isOnPlatform = true;
+			}
+		}
+		else {
+			if (gameobject->GetY() - GetY() < MARIO_BIG_BBOX_HEIGHT / 2 + 4)
+			{
+				SetY(gameobject->GetY() - MARIO_BIG_BBOX_HEIGHT / 2 - 4);
+				vy = 0;
+				isOnPlatform = true;
+			}
+		}
+	}
+}
+
+void CMario::SetLevelLower() {
+	isLower = true;
+
+	if (level > MARIO_LEVEL_SMALL)
+	{
+		StartUntouchable();
+		if (level == MARIO_LEVEL_BIG) {
+
+			SetLevel(MARIO_LEVEL_SMALL);
+		}
+		else {
+			AddChangeAnimation();
+			SetLevel(MARIO_LEVEL_BIG);
+		}
+	}
+	else
+	{
+		DebugOut(L">>> Mario DIE >>> \n");
+		SetState(MARIO_STATE_DIE);
+	}
+}
+
+void CMario::SetFly() {
+	if (levelRun == LEVEL_RUN_MAX) {
+		vy = -MARIO_FLYING;
+	}
+	else vy = -MARIO_FLY_FALL;
+	isFlying = true;
+}
+
+void CMario::SetMarioTailAttack() {
+	if (level == MARIO_LEVEL_TAIL) {
+		isTailAttack = true;
+	}
+}
+
+void CMario::AddChangeAnimation() {
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	CEffect* effect = new CEffect(x, y, EFFECT_CHANGE);
+	scene->AddObject(effect);
+}
+
+void CMario::AddEffectAttack(float xTemp, float yTemp) {
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_ATTACK);
+	scene->AddObject(effect);
+}
+//Trong AddScore, thong nhat AddScore(x,y,0) la + 1 Up, con lai la + score
+void CMario::AddScore(float xTemp, float yTemp, int scoreAdd) {
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	if (scoreAdd == 100) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_100);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 200) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_200);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 400) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_400);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 800) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_800);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 1000) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_1000);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 2000) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_2000);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 4000) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_4000);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 8000) {
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_SCORE_8000);
+		scene->AddObject(effect);
+	}
+	else if (scoreAdd == 0) {
+		Up++;
+		CEffect* effect = new CEffect(xTemp, yTemp, EFFECT_UP);
+		scene->AddObject(effect);
+	}
+}
+
+
+void CMario::IncreaseScoreUpCollision(float xTemp, float yTemp) {
+	start_score_up = GetTickCount64();
+	if (scoreUpCollision == 1) {
+		score += 100;
+		AddScore(xTemp, yTemp, 100);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision == 2) {
+		score += 200;
+		AddScore(xTemp, yTemp, 200);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision == 3) {
+		score += 400;
+		AddScore(xTemp, yTemp, 400);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision == 4) {
+		score += 800;
+		AddScore(xTemp, yTemp, 800);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision == 5) {
+		score += 1000;
+		AddScore(xTemp, yTemp, 1000);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision == 6) {
+		score += 2000;
+		AddScore(xTemp, yTemp, 2000);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision == 7) {
+		score += 4000;
+		AddScore(xTemp, yTemp, 4000);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision == 8) {
+		score += 8000;
+		AddScore(xTemp, yTemp, 8000);
+		scoreUpCollision++;
+	}
+	else if (scoreUpCollision > 8) {
+		scoreUpCollision = 9;
+		AddScore(xTemp, yTemp, 0);
+	}
+
+}
+
+bool CMario::MarioInDeadZone() { return y > POSITION_Y_DIE; }
+
+void CMario::AdjustLogicSitting() {
+	if (nx > 0) {
+		if (vx > 0) {
+			ax = -MARIO_ACCEL_WALK_X / 2;
+		}
+		else vx = 0;
+	}
+	else {
+		if (vx < 0) {
+			ax = MARIO_ACCEL_WALK_X / 2;
+		}
+		else vx = 0;
+	}
+}
+
+void CMario::ChangeWorldMapWhenDie() {
+	CDataGame* data = CGame::GetInstance()->GetDataGame();
+	if (GetTickCount64() - start_change_scene_die > TIME_CHANGE_SCENE) {
+		if (Up > 0) Up--;
+		else data->SettingGameOver();
+		level = MARIO_LEVEL_SMALL;
+		SaveDataGame();
+		CGame::GetInstance()->InitiateSwitchScene(ID_SCENE_WORLD_MAP);
+	}
+}
+
+void CMario::ChangeWorldMapWhenNotDie() {
+	if (GetTickCount64() - start_change_scene_clock > TIME_CHANGE_SCENE) {
+		CDataGame* data = CGame::GetInstance()->GetDataGame();
+		if (card3 != 0) {
+			card1 = 0;
+			card2 = 0;
+			card3 = 0;
+		}
+		data->SavePassDoorEasier(data->GetDoorProcess());
+		SaveDataGame();
+		CGame::GetInstance()->InitiateSwitchScene(ID_SCENE_WORLD_MAP);
+	}
+}
+
+
+void CMario::SettingMarioAutoMoveEndPlayScene()
+{
+	SetState(MARIO_STATE_IDLE);
+	x -= 1;// DE KHONG VONG LAP VO TAN XAY RA TRONG DAY
+	isWillDieInClock0 = false;
+	isClockVeryFast = true;
+	isNotMove = true;
+}
+
+void CMario::AddEffectEndWorldFont1() {
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	if (!isEndScene) {
+		CEffect* effect1 = new CEffect(POSITION_X_EFFECT_FONT_1, POSITION_Y_EFFECT_FONT_1, EFFECT_FONT_END_1);
+		scene->AddObject(effect1);
+		isWillAddEffect = true;
+		start_add_effect = GetTickCount64();
+		isEndScene = true;
+	}
+}
+
+void CMario::AddEffectEndWorldFont2() {
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+
+	if (GetTickCount64() - start_add_effect > TIME_ADD_EFFECT) {
+		if (isWillAddEffect) {
+			//testDebug++;
+			CEffect* effect2 = new CEffect(POSITION_X_EFFECT_FONT_2, POSITION_Y_EFFECT_FONT_2, EFFECT_FONT_END_2);
+			scene->AddObject(effect2);
+			start_add_effect = 0;
+			isWillAddEffect = false;
+			//SetState(MARIO_STATE_CHANGE_WORLD_MAP);
+		}
+	}
+}
+void CMario::AdjustHoldingKoopa() {
+	if (GetTickCount64() - start_holding > TIME_MAX_HOLDING) {
+		isHolding = false;
+		start_holding = 0;
+	}
+}
+void CMario::DownTimeClock1Second() {
+	if (clock > 0) {
+
+		if (GetTickCount64() - time_down_1_second > TIME_ONE_SECOND) {
+			clock--;
+			time_down_1_second = GetTickCount64();
+		}
+	}
+	else
+	{
+		clock = 0;
+		if (!isPrepareEndScene) {
+			SetState(MARIO_STATE_DIE);
+		}
+	}
+}
+
+void CMario::DownTimeClockAndAddScore() {
+	if (clock > TIME_DOWN_END_SCENE) {
+		if (GetTickCount64() - time_down_1_second > TIME_CLOCK_VERY_FAST) {
+			clock -= TIME_DOWN_END_SCENE;
+			score += 50 * TIME_DOWN_END_SCENE;
+			time_down_1_second = GetTickCount64();
+		}
+	}
+	else {
+		score += clock * 50;
+		clock = 0;
+		isEndScene = true;
+		isClockVeryFast = false;
+		SetState(MARIO_STATE_CHANGE_WORLD_MAP);
+	}
+}
+void CMario::SaveDataGame() {
+	CDataGame* dataGame = CGame::GetInstance()->GetDataGame();
+	dataGame->SaveCoin(coin);
+	dataGame->SaveLevel(level);
+	dataGame->SaveScore(score);
+	dataGame->SaveUp(Up);
+	dataGame->SaveCard1(card1);
+	dataGame->SaveCard2(card2);
+	dataGame->SaveCard3(card3);
+}
