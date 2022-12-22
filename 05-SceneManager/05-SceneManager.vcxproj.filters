@@ -117,6 +117,15 @@
     <ClCompile Include="DataGame.cpp">
       <Filter>Header Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="BrickColor.cpp">
+      <Filter>Header Files\Object\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipe.cpp">
+      <Filter>Header Files\Object\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="PlantEnemy.cpp">
+      <Filter>Header Files\Object\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetIDs.h">
@@ -199,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="DataGame.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickColor.h">
+      <Filter>Header Files\Object\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Header Files\Object\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="PlantEnemy.h">
+      <Filter>Header Files\Object\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
