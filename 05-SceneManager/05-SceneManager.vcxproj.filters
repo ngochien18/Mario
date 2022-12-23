@@ -43,6 +43,9 @@
     <Filter Include="Header Files\Map">
       <UniqueIdentifier>{4beecf3d-2ed6-4b39-9c2c-e2c7b80cbbfe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object\Items">
+      <UniqueIdentifier>{586f43fe-9d52-4525-a84d-46cd6fa31db6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -90,9 +93,6 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Header Files\Object\Brick</Filter>
     </ClCompile>
-    <ClCompile Include="Coin.cpp">
-      <Filter>Header Files\Object\Brick</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Header Files\Object</Filter>
     </ClCompile>
@@ -125,6 +125,21 @@
     </ClCompile>
     <ClCompile Include="PlantEnemy.cpp">
       <Filter>Header Files\Object\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="FireFromPlant.cpp">
+      <Filter>Header Files\Object\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Leaf.cpp">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="MushRoom.cpp">
+      <Filter>Header Files\Object\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +197,6 @@
     <ClInclude Include="Brick.h">
       <Filter>Header Files\Object\Brick</Filter>
     </ClInclude>
-    <ClInclude Include="Coin.h">
-      <Filter>Header Files\Object\Brick</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
@@ -217,6 +229,21 @@
     </ClInclude>
     <ClInclude Include="PlantEnemy.h">
       <Filter>Header Files\Object\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="FireFromPlant.h">
+      <Filter>Header Files\Object\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Leaf.h">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="MushRoom.h">
+      <Filter>Header Files\Object\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
