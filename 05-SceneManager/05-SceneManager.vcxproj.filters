@@ -46,6 +46,12 @@
     <Filter Include="Header Files\Object\Items">
       <UniqueIdentifier>{586f43fe-9d52-4525-a84d-46cd6fa31db6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object\Effect">
+      <UniqueIdentifier>{28eb035e-e7ea-4382-ae80-cf45577268b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\HUD">
+      <UniqueIdentifier>{d76deb48-fa44-4185-8425-fb7b89aa3c74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -140,6 +146,18 @@
     </ClCompile>
     <ClCompile Include="MushRoom.cpp">
       <Filter>Header Files\Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakBrick.cpp">
+      <Filter>Header Files\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Header Files\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Header Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="HUDWorldMap.cpp">
+      <Filter>Header Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +262,18 @@
     </ClInclude>
     <ClInclude Include="MushRoom.h">
       <Filter>Header Files\Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakBrick.h">
+      <Filter>Header Files\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Header Files\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="HUDWorldMap.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Header Files\HUD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

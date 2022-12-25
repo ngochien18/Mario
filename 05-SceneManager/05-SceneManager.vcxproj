@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="BreakBrick.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="BrickColor.cpp" />
     <ClCompile Include="BrickQuestion.cpp" />
@@ -154,10 +155,13 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DataGame.cpp" />
     <ClCompile Include="debug.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="FireFromPlant.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
+    <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="HUDWorldMap.cpp" />
     <ClCompile Include="Koopa.cpp" />
     <ClCompile Include="Leaf.cpp" />
     <ClCompile Include="main.cpp" />
@@ -180,6 +184,7 @@
     <ClInclude Include="AnimationFrame.h" />
     <ClInclude Include="Animations.h" />
     <ClInclude Include="AssetIDs.h" />
+    <ClInclude Include="BreakBrick.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="BrickColor.h" />
     <ClInclude Include="BrickQuestion.h" />
@@ -188,10 +193,13 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DataGame.h" />
     <ClInclude Include="debug.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="FireFromPlant.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="HUD.h" />
+    <ClInclude Include="HUDWorldMap.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopa.h" />
     <ClInclude Include="Leaf.h" />
