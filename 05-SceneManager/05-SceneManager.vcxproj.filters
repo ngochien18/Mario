@@ -159,6 +159,9 @@
     <ClCompile Include="HUDWorldMap.cpp">
       <Filter>Header Files\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Header Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetIDs.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>Header Files\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
