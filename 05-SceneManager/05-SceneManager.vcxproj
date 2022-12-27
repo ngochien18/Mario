@@ -156,11 +156,14 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DataGame.cpp" />
     <ClCompile Include="debug.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="FireFromPlant.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
+    <ClCompile Include="Grass.cpp" />
+    <ClCompile Include="Hammer.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="HUDWorldMap.cpp" />
     <ClCompile Include="Koopa.cpp" />
@@ -169,6 +172,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="MushRoom.cpp" />
+    <ClCompile Include="OtherObject.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PlantEnemy.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -179,6 +183,9 @@
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="WorldMapKeyEvent.cpp" />
+    <ClCompile Include="WorldMapPlayer.cpp" />
+    <ClCompile Include="WorldMapScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -195,11 +202,14 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DataGame.h" />
     <ClInclude Include="debug.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="FireFromPlant.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="Grass.h" />
+    <ClInclude Include="Hammer.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="HUDWorldMap.h" />
     <ClInclude Include="KeyEventHandler.h" />
@@ -208,6 +218,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="MushRoom.h" />
+    <ClInclude Include="OtherObject.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PlantEnemy.h" />
     <ClInclude Include="Platform.h" />
@@ -220,6 +231,9 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="WorldMapKeyEvent.h" />
+    <ClInclude Include="WorldMapPlayer.h" />
+    <ClInclude Include="WorldMapScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

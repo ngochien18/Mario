@@ -52,6 +52,12 @@
     <Filter Include="Header Files\HUD">
       <UniqueIdentifier>{d76deb48-fa44-4185-8425-fb7b89aa3c74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\WorldMap">
+      <UniqueIdentifier>{d0685032-655a-43a7-8184-8df25153b1ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WorldMap\ObjectWorldMap">
+      <UniqueIdentifier>{496bf790-84ea-44f3-83ed-be1c41f93022}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -161,6 +167,27 @@
     </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Header Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMapScene.cpp">
+      <Filter>Header Files\WorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMapKeyEvent.cpp">
+      <Filter>Header Files\WorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Grass.cpp">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMapPlayer.cpp">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="OtherObject.cpp">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Hammer.cpp">
+      <Filter>Header Files\Object\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +307,27 @@
     </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMapScene.h">
+      <Filter>Header Files\WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMapKeyEvent.h">
+      <Filter>Header Files\WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Grass.h">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="OtherObject.h">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMapPlayer.h">
+      <Filter>Header Files\WorldMap\ObjectWorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Hammer.h">
+      <Filter>Header Files\Object\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
