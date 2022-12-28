@@ -58,6 +58,12 @@
     <Filter Include="Header Files\WorldMap\ObjectWorldMap">
       <UniqueIdentifier>{496bf790-84ea-44f3-83ed-be1c41f93022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Intro">
+      <UniqueIdentifier>{383921c5-325a-41e1-b921-6d162334235c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Intro\ObjectIntro">
+      <UniqueIdentifier>{59398922-d5f7-4888-bfdf-5723b1cf951a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,14 +195,32 @@
     <ClCompile Include="Hammer.cpp">
       <Filter>Header Files\Object\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="FontIntro.cpp">
+      <Filter>Header Files\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroArrow.cpp">
+      <Filter>Header Files\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroBackground.cpp">
+      <Filter>Header Files\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroKey.cpp">
+      <Filter>Header Files\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformIntro.cpp">
+      <Filter>Header Files\Intro\ObjectIntro</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Header Files\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Header Files\Object\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="FlowerFire.cpp">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AssetIDs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
@@ -328,6 +352,36 @@
     </ClInclude>
     <ClInclude Include="Hammer.h">
       <Filter>Header Files\Object\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroArrow.h">
+      <Filter>Header Files\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroBackground.h">
+      <Filter>Header Files\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroKey.h">
+      <Filter>Header Files\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="FontIntro.h">
+      <Filter>Header Files\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformIntro.h">
+      <Filter>Header Files\Intro\ObjectIntro</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Header Files\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Object\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="FlowerFire.h">
+      <Filter>Header Files\Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetIDs.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

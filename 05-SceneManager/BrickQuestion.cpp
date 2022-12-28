@@ -1,8 +1,11 @@
-/*
 #include "BrickQuestion.h"
+#include "Leaf.h"
+#include "MushRoom.h"
 #include "Mario.h"
 #include "PlayScene.h"
+#include "FlowerFire.h"
 #include "Coin.h"
+#include"BrickColor.h"
 
 CBrickQuestion::CBrickQuestion(float x, float y, int model) :CGameObject(x, y)
 {
@@ -92,5 +95,3 @@ void CBrickQuestion::SetState(int state)
 
 	}
 }
-
-*/

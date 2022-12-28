@@ -19,7 +19,7 @@ public:
 		this->sceneFilePath = filePath;
 		this->key_handler = NULL;
 	}
-
+	int GetIdScene() { return id; }
 	LPKEYEVENTHANDLER GetKeyEventHandler() { return key_handler; }
 	virtual void Load() = 0;
 	virtual void Unload() = 0;

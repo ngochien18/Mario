@@ -3,11 +3,12 @@
 #include "Game.h"
 #include "debug.h"
 #include "Utils.h"
-
+#include "Scene.h"
 #include "Texture.h"
+#include "IntroScene.h"
 #include "Animations.h"
 #include "PlayScene.h"
-
+#include"WorldMapScene.h"
 CGame* CGame::__instance = NULL;
 
 /*
@@ -27,6 +28,9 @@ void CGame::Init(HWND hWnd, HINSTANCE hInstance)
 	backBufferWidth = r.right + 1;
 	backBufferHeight = r.bottom + 1;
 
+	screen_height = r.bottom + 1;
+	screen_width = FULL_WEIGHT_1_1;
+	// r.right+1;
 	DebugOut(L"[INFO] Window's client area: width= %d, height= %d\n", r.right - 1, r.bottom - 1);
 
 	// Create & clear the DXGI_SWAP_CHAIN_DESC structure
@@ -452,13 +456,26 @@ void CGame::_ParseSection_SETTINGS(string line)
 void CGame::_ParseSection_SCENES(string line)
 {
 	vector<string> tokens = split(line);
-
 	if (tokens.size() < 2) return;
+	LPSCENE scene;
 	int id = atoi(tokens[0].c_str());
 	LPCWSTR path = ToLPCWSTR(tokens[1]);   // file: ASCII format (single-byte char) => Wide Char
-
-	LPSCENE scene = new CPlayScene(id, path);
-	scenes[id] = scene;
+	int type = atoi(tokens[2].c_str());
+	//DebugOut(L"TYPE CUA CAI VUA LOAD %d\n", type);
+	switch (type) {
+	case TYPE_WORLD_PLAY:
+		scene = new CPlayScene(id, path);
+		scenes[id] = scene;
+		break;
+	case TYPE_WORLD_MAP:
+		scene = new CWorldMapScene(id, path);
+		scenes[id] = scene;
+		break;
+	case TYPE_WORLD_INTRO:
+		scene = new CIntroScene(id, path);
+		scenes[id] = scene;
+		break;
+	}
 }
 
 /*
@@ -512,8 +529,7 @@ void CGame::SwitchScene()
 {
 	if (next_scene < 0 || next_scene == current_scene) return;
 
-	DebugOut(L"[INFO] Switching to scene %d\n", next_scene);
-
+	DebugOut(L"[INFO] Switching to scene %d %d\n", current_scene, next_scene);
 	scenes[current_scene]->Unload();
 
 	CSprites::GetInstance()->Clear();
@@ -558,4 +574,5 @@ CGame* CGame::GetInstance()
 	if (__instance == NULL) __instance = new CGame();
 	return __instance;
 }
+
 

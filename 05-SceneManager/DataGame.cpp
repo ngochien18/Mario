@@ -1,6 +1,6 @@
 #include "DataGame.h"
 #include "Mario.h"
-//#include"Door.h"
+#include "Door.h"
 CDataGame::CDataGame() {
 	ResetFullData();
 }
@@ -66,7 +66,7 @@ void CDataGame::ResetFullData() {
 	isPassDoor5 = false;
 	isPassDoor6 = false;
 }
-/*
+
 void CDataGame::SavePassDoorEasier(int i) {
 	switch (i) {
 	case DOOR_WORLD_1_1: SavePassDoor(true, false, false, false, false, false); break;
@@ -77,7 +77,7 @@ void CDataGame::SavePassDoorEasier(int i) {
 	case DOOR_WORLD_1_6: SavePassDoor(false, false, false, false, false, true);  break;
 	}
 }
-*/
+
 
 void CDataGame::ChangeBetweenPrepareContinueAndEnd() {
 	if (prepareContinue) {

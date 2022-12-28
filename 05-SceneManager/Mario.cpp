@@ -5,7 +5,7 @@
 #include "Effect.h"
 #include "Mario.h"
 #include "Bullet.h"
-#include"Game.h"
+#include "Game.h"
 #include "PlantEnemy.h"
 #include "Game.h"
 #include "Koopa.h"
@@ -227,7 +227,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			start_kick = 0;
 		}
 	}
-	// Delay giua cac lan ban tu mario
+	//Delay giua cac lan ban tu mario
 	if (isShoot) {
 		start_limit_shoot = GetTickCount64();
 		if (GetTickCount64() - start_shoot > TIME_SHOOT_ANI) {
